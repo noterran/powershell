@@ -1,0 +1,1 @@
+Add-PrinterPort -Name "HP Color LaserJet Pro MFP" -PrinterHostAddress "192.168.141.251"
