@@ -1,0 +1,1 @@
+powershell -windowstyle hidden -noexit -executionpolicy bypass -file .\Add-Printer_Kanterellenhjemmet.ps1
