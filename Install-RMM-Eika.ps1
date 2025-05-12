@@ -1,5 +1,5 @@
 $Platform="merlot"
-$SiteID="c274258b-007a-4fa1-b178-d4b20641990f" #sma-default
+$SiteID="c274258b-007a-4fa1-b178-d4b20641990f" #egs-default
 <# 
 Datto RMM Agent deploy by MS Azure Intune 
 Designed and written by Jon North, Datto, March 2020 
