@@ -43,4 +43,4 @@ foreach($CSVrecord in $CSVrecords ){
         $SkippedUsers += $upn
     }
 }
-Disconnect-ExchangeOnline
+Disconnect-ExchangeOnline -Confirm:$false
