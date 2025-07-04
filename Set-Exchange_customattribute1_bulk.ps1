@@ -5,9 +5,27 @@
 $SkippedUsers = @()
 $FailedUsers = @()
 
-#Edits customattribute1 for users in a CSV file
-#CSV file should have a header with UserPrincipalName and customattribute1
-$CSVrecords = Import-Csv "C:\Users\Ole.Anders.Herland\OneDrive - Marcello Consulting AS\Skrivebord\test.csv" -Delimiter ","
+#edits department and customattribute 1 for users in a CSV file
+#CSV file should have a header with UserPrincipalName, customattribute1 and department
+$CSVrecords = Import-Csv "C:\Users\Ole.Anders.Herland\OneDrive - Marcello Consulting AS\Skrivebord\UranienansatteCustom1.csv" -Delimiter ","
+foreach($CSVrecord in $CSVrecords ){
+    $upn = $CSVrecord.UserPrincipalName
+    $user = Get-Mailbox -Filter "userPrincipalName -eq '$upn'"  
+    if ($user) {
+        try{
+        $user | Set-User -Department $CSVrecord.department -Confirm:$false
+        
+        } catch {
+        $FailedUsers += $upn
+        Write-Warning "$upn user found, but FAILED to update department."
+        }
+    }
+    else {
+        Write-Warning "$upn not found, skipped updating department"
+        $SkippedUsers += $upn
+    }
+}
+
 foreach($CSVrecord in $CSVrecords ){
     $upn = $CSVrecord.UserPrincipalName
     $user = Get-Mailbox -Filter "userPrincipalName -eq '$upn'"  
@@ -22,24 +40,6 @@ foreach($CSVrecord in $CSVrecords ){
     }
     else {
         Write-Warning "$upn not found, skipped updating customattribute1"
-        $SkippedUsers += $upn
-    }
-}
-
-foreach($CSVrecord in $CSVrecords ){
-    $upn = $CSVrecord.UserPrincipalName
-    $user = Get-Mailbox -Filter "userPrincipalName -eq '$upn'"  
-    if ($user) {
-        try{
-        $user | Set-User -Department $CSVrecord.department
-        
-        } catch {
-        $FailedUsers += $upn
-        Write-Warning "$upn user found, but FAILED to update department."
-        }
-    }
-    else {
-        Write-Warning "$upn not found, skipped updating department"
         $SkippedUsers += $upn
     }
 }
