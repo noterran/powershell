@@ -7,7 +7,7 @@ $FailedUsers = @()
 
 #Edits customattribute1 for users in a CSV file
 #CSV file should have a header with UserPrincipalName and customattribute1
-$CSVrecords = Import-Csv "C:\Users\Ole.Anders.Herland\OneDrive - Marcello Consulting AS\Skrivebord\test.csv" -Delimiter ","
+$CSVrecords = Import-Csv "C:\Users\Ole.Anders.Herland\OneDrive - Marcello Consulting AS\Skrivebord\UranienansatteCustom1.csv" -Delimiter ","
 foreach($CSVrecord in $CSVrecords ){
     $upn = $CSVrecord.UserPrincipalName
     $user = Get-Mailbox -Filter "userPrincipalName -eq '$upn'"  
