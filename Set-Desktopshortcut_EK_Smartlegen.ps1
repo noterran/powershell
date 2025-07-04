@@ -1,3 +1,4 @@
+# Description: This script creates a desktop shortcut for the Kvalitetsportalen URL on Windows.
 $null = $WshShell = New-Object -comObject WScript.Shell
 $path = "C:\Users\Public\Desktop\Kvalitetsportalen.url"
 $targetpath = "https://smartlegenssykehjem.datakvalitet.net/"
