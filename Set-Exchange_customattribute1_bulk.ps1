@@ -1,5 +1,5 @@
 #Connects to exchange online and sets customattribute1 for users in a CSV file
-#Connect-ExchangeOnline
+Connect-ExchangeOnline
 
 #Creates arrays to hold users that were skipped or failed
 $SkippedUsers = @()
@@ -7,7 +7,7 @@ $FailedUsers = @()
 
 #edits department and customattribute 1 for users in a CSV file
 #CSV file should have a header with UserPrincipalName, customattribute1 and department
-$CSVrecords = Import-Csv "C:\Users\Ole.Anders.Herland\OneDrive - Marcello Consulting AS\Skrivebord\UranienansatteCustom1.csv" -Delimiter ","
+$CSVrecords = Import-Csv "C:\Users\Ole.Anders.Herland\OneDrive - Marcello Consulting AS\Skrivebord\KantarellenansatteCustom1.csv" -Delimiter ","
 foreach($CSVrecord in $CSVrecords ){
     $upn = $CSVrecord.UserPrincipalName
     $user = Get-Mailbox -Filter "userPrincipalName -eq '$upn'"  
@@ -43,3 +43,4 @@ foreach($CSVrecord in $CSVrecords ){
         $SkippedUsers += $upn
     }
 }
+Disconnect-ExchangeOnline
