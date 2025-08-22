@@ -1,7 +1,7 @@
 # Variables
 $driverDownloadPath = "https://ftp.hp.com/pub/softlib/software13/UPD/upd-pcl6-x64-7.8.0.26261.zip"
-$portName = "IP_192.168.141.251" # Printer port name
-$portAddress = "192.168.141.251" # Printer IP
+$portName = "IP_10.6.100.10" # Printer port name
+$portAddress = "10.6.100.10" # Printer IP
 $printerName = "Smartlegen Printer Kantarellen HP M479fdw" # Printer display name
 $driverName = "HP Universal Printing PCL 6" # Must be exact! Install driver on your computer and copy its name and paste here!
 # Do not modify these variables
