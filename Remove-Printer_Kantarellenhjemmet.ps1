@@ -14,9 +14,9 @@ $printerExists = Get-Printer -Name $printerName -ErrorAction SilentlyContinue
 ######################
 # Remove Printer Port
 if ($portExists) {
-  Remove-PrinterPort -Name $portName -PrinterHostAddress $portAddress
+  Remove-PrinterPort -Name $portName -ComputerName $env:computername
 }
-# Install Printer
+# Remove Printer
 if ($printerExists) {
-Remove-Printer -Name $printerName -PortName $portName -DriverName $driverName
+Remove-Printer -Name $printerName
 }
