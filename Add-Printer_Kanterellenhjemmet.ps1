@@ -1,5 +1,5 @@
 # Variables
-$driverDownloadPath = "https://ftp.hp.com/pub/softlib/software13/printers/UPD/upd-pcl6-x64-7.6.0.26178.zip"
+$driverDownloadPath = "https://ftp.hp.com/pub/softlib/software13/UPD/upd-pcl6-x64-7.8.0.26261.zip"
 $portName = "IP_192.168.141.251" # Printer port name
 $portAddress = "192.168.141.251" # Printer IP
 $printerName = "Smartlegen Printer Kantarellen HP M479fdw" # Printer display name
