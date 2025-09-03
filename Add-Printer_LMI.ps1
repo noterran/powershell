@@ -8,6 +8,7 @@ $portAddress = "192.168.200.57" # Printer IP
 $driverName = "Canon Generic Plus PCL6"
 $url = "https://pdisp01.c-wss.com/gdl/WWUFORedirectTarget.do?id=MDEwMDAwOTQyMzE2&cmp=ACM&lang=JA"
 $file = "c:\Temp\canon.exe"
+$extractPath = "C:\Temp\CanonPrinterDrivers"
 $portExists = Get-Printerport -Name $portname -ErrorAction SilentlyContinue
 $printerExists = Get-Printer -Name $printerName -ErrorAction SilentlyContinue
 
@@ -24,7 +25,6 @@ Set-PSRepository -Name 'PSGallery' -SourceLocation "https://www.powershellgaller
 Install-Module -Name 7Zip4PowerShell -Force
 
 #Extract 7zip file
-$extractPath = "C:\Temp\CanonPrinterDrivers"
 Expand-7Zip -ArchiveFileName "c:\temp\canon.exe" -TargetPath $extractPath
 
 #Install Printer driver
