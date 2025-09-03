@@ -27,7 +27,7 @@ if (-not $printerExists) {
 Add-Printer -Name $printerName -PortName $portName -DriverName $driverName
 }
 Set-PrintConfiguration -PrinterName $printerName -Color $true # Set Default to Color print
-#(Get-WmiObject -ClassName Win32_Printer | Where-Object -Property Name -EQ $printerName).SetDefaultPrinter() # Set as default printer
+(Get-WmiObject -ClassName Win32_Printer | Where-Object -Property Name -EQ $printerName).SetDefaultPrinter() # Set as default printer
 # Cleanup
 Remove-Item -Path $driverDownloaded -Force
 Remove-Item -Path $extractPath -Force -Recurse
