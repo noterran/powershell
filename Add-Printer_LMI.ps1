@@ -11,6 +11,7 @@ $file = "c:\Temp\canon.exe"
 $extractPath = "C:\Temp\CanonPrinterDrivers"
 $portExists = Get-Printerport -Name $portname -ErrorAction SilentlyContinue
 $printerExists = Get-Printer -Name $printerName -ErrorAction SilentlyContinue
+$PrintConfig.MediaType = "Plain 2"
 
 #Install printer
 if (-not $printerExists) {
@@ -38,6 +39,8 @@ if (-not $portExists) {
 
 Add-Printer -Name $printerName -PortName $portName -DriverName $driverName
 Set-PrintConfiguration -PrinterName $printerName -Color $true # Set Default to Color print
+Set-PrintConfiguration -PrinterName $printerName -PaperSize A4 # Set Default Paper Size to A4
+Set-PrintConfiguration -InputObject $PrintConfig # Set Default Media Type to Plain 2
 (Get-WmiObject -ClassName Win32_Printer | Where-Object -Property Name -EQ $printerName).SetDefaultPrinter() # Set as default printer
 }
 
