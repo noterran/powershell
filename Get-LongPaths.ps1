@@ -1,0 +1,2 @@
+Get-ChildItem -Path "\\lmi.intra\common\LMI\" -Recurse -Force -ErrorAction SilentlyContinue | Where-Object {$_.FullName.Length -gt 300} | Select-Object FullName, @{Name="Length";Expression={$_.FullName.Length}} | Export-Csv -Path "C:\Users\admoleher\long_paths.csv" -NoTypeInformation
+Write-Host "Long path report generated at C:\Users\admoleher\long_paths.csv"

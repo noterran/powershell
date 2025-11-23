@@ -1,0 +1,1 @@
+get-childitem -Recurse -File -Path 'C:/example' | rename-item -newname { $_.name -replace "Original","Replacement" }

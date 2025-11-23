@@ -1,0 +1,13 @@
+#Download file from
+#https://www.catalog.update.microsoft.com/home.aspx
+
+#Connect and copy file to localhost from remote host
+$Session = New-PSSession -ComputerName "ops-adm-001" -Credential "operations\admoleher"
+Copy-Item "C:\Admin\windows10.0-kb5037423-x64_1032bb3554d40ec5df5f9c08b8f1078905fb5157.msu" -Destination "C:\Users\admoleher" -FromSession $Session
+
+#Install with wusa (can run silent, not necessary if you are present)
+
+Start-Process wusa.exe "c:\Users\admoleher\windows10.0-kb5037423-x64_1032bb3554d40ec5df5f9c08b8f1078905fb5157.msu" #/quiet /norestart
+
+#Check if update got installed
+wmic qfe | find "5037423"

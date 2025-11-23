@@ -1,0 +1,2 @@
+$schtask = schtasks.exe /query /s localhost  /V /FO CSV | ConvertFrom-Csv | Where-Object { $_.TaskName -ne "TaskName" }
+$schtask | Where-Object { $_.Author -ne "Microsoft Corporation" } | format-table TaskName, 'Run As User'

@@ -1,0 +1,1 @@
+get-wmiobject win32_service | format-table name, startname, startmode
