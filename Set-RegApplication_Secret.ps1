@@ -1,4 +1,6 @@
 # Connect to Microsoft Graph with the required permissions
+Install-Module Microsoft.Graph -Scope CurrentUser -Force -AllowClobber
+Import-Module Microsoft.Graph -Force
 Connect-MgGraph -Scopes "Application.ReadWrite.All"
 #Variables
 $appId = "0f7a0cdf-5fd3-4e12-8e54-ef30fdc0f436"
