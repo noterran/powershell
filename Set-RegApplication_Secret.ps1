@@ -8,8 +8,8 @@ $oldAppCredentialId = Get-AzADAppCredential -ApplicationId $appId
 $startDate = Get-Date
 $endDate = $startDate.AddMonths(3)
 # Export the old application credentials to a CSV file with a timestamped filename
-$oldAppCredentialId | Export-Csv -Path C:\temp\OldAppCredentials.csv -NoTypeInformation
-$filepath = "C:\temp\OldAppCredentials.csv"
+$oldAppCredentialId | Export-Csv -Path "C:\Set-RegApplication_Secret_Logs\OldAppCredentials.csv" -NoTypeInformation
+$filepath = "C:\Set-RegApplication_Secret_Logs\OldAppCredentials.csv"
 $basename = (Get-Item $filepath).BaseName
 $extension = (Get-Item $filepath).Extension
 $newName = "$basename-$(Get-Date -Format 'yyyyMMddHHmmss')$extension"
