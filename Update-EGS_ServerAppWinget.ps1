@@ -32,7 +32,6 @@ foreach ($app in $appList) {
     try {
         winget upgrade --id=$app --source=winget --silent --accept-package-agreements --accept-source-agreements --force
         Write-EventLog -LogName $logName -Source $sourceName -EventId 3001 -EntryType Information -Message "Winget ran successfully for $app" -Category 1 -RawData 10,20
-        $result
     }
     catch {
         Write-EventLog -LogName $logName -Source $sourceName -EventID 3002 -EntryType Information -Message "Winget failed to upgrade $app" -Category 1 -RawData 10,20
