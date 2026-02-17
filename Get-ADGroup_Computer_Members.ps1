@@ -1,3 +1,4 @@
+import-mobule ActiveDirectory
 #Get the computer name from the user
 Write-Host "Input the computer name and press enter"
 $ComputerName = Read-Host
