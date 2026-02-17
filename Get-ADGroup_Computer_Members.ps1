@@ -1,7 +1,7 @@
 import-module ActiveDirectory
 # Get the computer name from the user
 Write-Host "Input the computer name and press enter"
-$ComputerName = "fst-app-001"
+$ComputerName = Read-Host
 
 $ComputerDN = Get-ADComputer -Identity "$ComputerName" | Select-Object DistinguishedName
 write-host $ComputerDN
@@ -19,4 +19,4 @@ write-host $cleanComputerDN
 $allGroups = Get-ADPrincipalGroupMembership -Identity "$cleanComputerDN" |
     Select-Object Name
 
-$allGroups | Export-Csv -Path "C:\tmp\test-GroupMembership.csv" -NoTypeInformation
+$allGroups | Export-Csv -Path "C:\temp\$computerName-GroupMembership.csv" -NoTypeInformation
