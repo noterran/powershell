@@ -1,17 +1,17 @@
 try {
     $wingetVersion = winget --version 2>&1
-    Write-Host "WinGet is installed. Version: $wingetVersion"
+    "WinGet is installed. Version: $wingetVersion" | out-file -path "C:/log/WinGetVersion.log" -Append
 }
 
 catch {
-    Write-Host "WinGet is not installed or not recognized."
+    "WinGet is not installed or not recognized." | out-file -path "C:/log/WinGetVersion.log" -Append
     $progressPreference = 'silentlyContinue'
-    Write-Host "Installing WinGet PowerShell module from PSGallery..."
+    "Installing WinGet PowerShell module from PSGallery..." | out-file -path "C:/log/WinGetVersion.log" -Append
     Install-PackageProvider -Name NuGet -Force | Out-Null
     Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
-    Write-Host "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..."
+    "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..." | out-file -path "C:/log/WinGetVersion.log" -Append
     Repair-WinGetPackageManager -AllUsers
-    Write-Host "Done."
+    "Done." | out-file -path "C:/log/WinGetVersion.log" -Append
 }
 
 $sourceName = "Update-EGS_ServerAppWinget"
@@ -21,9 +21,9 @@ $logName = "Application"
 if (![System.Diagnostics.EventLog]::SourceExists($sourceName)) {
     # If not, create it. Requires administrative privileges.
     New-EventLog -LogName $logName -Source $sourceName
-    Write-Host "Created new event log source: $sourceName"
+    "Created new event log source: $sourceName" | out-file -path "C:/log/WinGetVersion.log" -Append
 } else {
-    Write-Host "Event log source already exists: $sourceName"
+    "Event log source already exists: $sourceName" | out-file -path "C:/log/WinGetVersion.log" -Append
 }
 
 $appList = @("WinSCP.WinSCP")
