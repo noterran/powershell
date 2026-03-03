@@ -1,3 +1,9 @@
+#Set up the log directory
+
+if (!(Test-Path "C:/log")) {
+    New-Item -ItemType Directory -Path "C:/log" | Out-Null
+}
+
 try {
     $wingetVersion = winget --version 2>&1
     "WinGet is installed. Version: $wingetVersion" | out-file -path "C:/log/WinGetVersion.log" -Append
