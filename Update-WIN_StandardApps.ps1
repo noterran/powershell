@@ -20,8 +20,26 @@ catch {
 }
 
 #List of all apps to be installed or upgraded
-$appList = @("WinSCP.WinSCP")
+$appList = @("Notepad++.Notepad++")
+foreach ($app in $appList) {
+    $appToStop = $app.Substring(0, $app.IndexOf("."))
+    #$appToStop
+    $task = Get-Process | Where {$_.Name -like $appToStop} | Select-Object -ExpandProperty ProcessName
+    $taskToKill = $task + ".exe"
+    c:\windows\system32\taskkill /f /im $tasktokill
+ }
 
+ $appToStop = $app.Substring(0, $app.IndexOf("."))
+
+#Stop the apps
+taskkill /im process.exe /f /t
+foreach ($app in $appList) {
+   write-host $app.exe
+    #taskkill /im $app.exe /f /t
+ }
+
+
+#Update the apps
 foreach ($app in $appList) {
     try {
         winget upgrade --id=$app --source=winget --silent --accept-package-agreements --accept-source-agreements --force
