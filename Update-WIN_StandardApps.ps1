@@ -21,6 +21,8 @@ catch {
 
 #List of all apps to be installed or upgraded
 $appList = @("Notepad++.Notepad++")
+
+#stopping the apps
 foreach ($app in $appList) {
     $appToStop = $app.Substring(0, $app.IndexOf("."))
     #$appToStop
@@ -28,16 +30,6 @@ foreach ($app in $appList) {
     $taskToKill = $task + ".exe"
     c:\windows\system32\taskkill /f /im $tasktokill
  }
-
- $appToStop = $app.Substring(0, $app.IndexOf("."))
-
-#Stop the apps
-taskkill /im process.exe /f /t
-foreach ($app in $appList) {
-   write-host $app.exe
-    #taskkill /im $app.exe /f /t
- }
-
 
 #Update the apps
 foreach ($app in $appList) {
