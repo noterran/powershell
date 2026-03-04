@@ -6,17 +6,17 @@ if (!(Test-Path "C:/log")) {
 #Install winget if necessary
 try {
     $wingetVersion = winget --version 2>&1
-    "WinGet is installed. Version: $wingetVersion" | out-file -path "C:/log/WinGetVersion.log" -Append
+    "WinGet is installed. Version: $wingetVersion" | out-file -filepath "C:/log/WinGetVersion.log" -Append
 }
 catch {
-    "WinGet is not installed or not recognized." | out-file -path "C:/log/WinGetVersion.log" -Append
+    "WinGet is not installed or not recognized." | out-file -filepath "C:/log/WinGetVersion.log" -Append
     $progressPreference = 'silentlyContinue'
-    "Installing WinGet PowerShell module from PSGallery..." | out-file -path "C:/log/WinGetVersion.log" -Append
+    "Installing WinGet PowerShell module from PSGallery..." | out-file -filepath "C:/log/WinGetVersion.log" -Append
     Install-PackageProvider -Name NuGet -Force | Out-Null
     Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
-    "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..." | out-file -path "C:/log/WinGetVersion.log" -Append
+    "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..." | out-file -filepath "C:/log/WinGetVersion.log" -Append
     Repair-WinGetPackageManager -AllUsers
-    "Done." | out-file -path "C:/log/WinGetVersion.log" -Append
+    "Done." | out-file -filepath "C:/log/WinGetVersion.log" -Append
 }
 
 #List of all apps to be installed or upgraded
@@ -25,10 +25,10 @@ $appList = @("WinSCP.WinSCP")
 foreach ($app in $appList) {
     try {
         winget upgrade --id=$app --source=winget --silent --accept-package-agreements --accept-source-agreements --force
-        "Successfully ran Winget for $app" | out-file -path "C:/log/WinGetVersion.log" -Append
+        "Successfully ran Winget for $app" | out-file -filepath "C:/log/WinGetVersion.log" -Append
     }
     catch {
-        "Failed to run Winget for $app" | out-file -path "C:/log/WinGetVersion.log" -Append
+        "Failed to run Winget for $app" | out-file -filepath "C:/log/WinGetVersion.log" -Append
     }
  }
 
