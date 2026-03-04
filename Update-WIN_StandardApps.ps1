@@ -46,4 +46,4 @@ $updatable | Out-file -FilePath "C:/log/updateavailable.csv" -Encoding utf8
 
 #Append status column and trim file
 $file = Import-Csv "C:/log/updateavailable.csv" -Header "column1"
-$file | select-object column1,@{Name="column2";Expression={'2'}} | Export-Csv -path "C:/log/updateavailable.csv" -NoTypeInformation
+$file | select-object column1,@{Name="column2";Expression={'2'}} -skip 1| Export-Csv -path "C:/log/updateavailable.csv" -NoTypeInformation
