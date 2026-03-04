@@ -1,3 +1,7 @@
+#Indicate new run of Update-Win_Standardapps
+$timestamp = Get-Date
+$timestamp | out-file -filepath "C:/log/WinGetVersion.log" -Append
+
 #Set up the log directory if necessary
 if (!(Test-Path "C:/log")) {
     New-Item -ItemType Directory -Path "C:/log" | Out-Null
