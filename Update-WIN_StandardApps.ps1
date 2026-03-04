@@ -25,7 +25,6 @@ $appList = @("Notepad++.Notepad++")
 #stopping the apps
 foreach ($app in $appList) {
     $appToStop = $app.Substring(0, $app.IndexOf("."))
-    #$appToStop
     $task = Get-Process | Where {$_.Name -like $appToStop} | Select-Object -ExpandProperty ProcessName
     $taskToKill = $task + ".exe"
     c:\windows\system32\taskkill /f /im $tasktokill
