@@ -1,14 +1,13 @@
-#Set up the log directory
-
+#Set up the log directory if necessary
 if (!(Test-Path "C:/log")) {
     New-Item -ItemType Directory -Path "C:/log" | Out-Null
 }
 
+#Install winget if necessary
 try {
     $wingetVersion = winget --version 2>&1
     "WinGet is installed. Version: $wingetVersion" | out-file -path "C:/log/WinGetVersion.log" -Append
 }
-
 catch {
     "WinGet is not installed or not recognized." | out-file -path "C:/log/WinGetVersion.log" -Append
     $progressPreference = 'silentlyContinue'
@@ -20,26 +19,31 @@ catch {
     "Done." | out-file -path "C:/log/WinGetVersion.log" -Append
 }
 
-$sourceName = "Update-EGS_ServerAppWinget"
-$logName = "Application"
-
-# Check if the source exists
-if (![System.Diagnostics.EventLog]::SourceExists($sourceName)) {
-    # If not, create it. Requires administrative privileges.
-    New-EventLog -LogName $logName -Source $sourceName
-    "Created new event log source: $sourceName" | out-file -path "C:/log/WinGetVersion.log" -Append
-} else {
-    "Event log source already exists: $sourceName" | out-file -path "C:/log/WinGetVersion.log" -Append
-}
-
+#List of all apps to be installed or upgraded
 $appList = @("WinSCP.WinSCP")
 
 foreach ($app in $appList) {
     try {
         winget upgrade --id=$app --source=winget --silent --accept-package-agreements --accept-source-agreements --force
-        Write-EventLog -LogName $logName -Source $sourceName -EventId 3001 -EntryType Information -Message "Winget ran successfully for $app" -Category 1 -RawData 10,20
+        "Successfully ran Winget for $app" | out-file -path "C:/log/WinGetVersion.log" -Append
     }
     catch {
-        Write-EventLog -LogName $logName -Source $sourceName -EventID 3002 -EntryType Information -Message "Winget failed to upgrade $app" -Category 1 -RawData 10,20
-    }      
+        "Failed to run Winget for $app" | out-file -path "C:/log/WinGetVersion.log" -Append
+    }
  }
+
+Remove-Item -Path "C:/log/updateavailable.csv" -ErrorAction SilentlyContinue
+
+#install WingetClient module if necessary
+if (!(Get-Module -ListAvailable -Name Microsoft.WinGet.Client)) {
+    Install-Module -Name Microsoft.WinGet.Client -Repository PSGallery -Force -ErrorAction SilentlyContinue
+} 
+
+#check if apps need update
+$installed = Get-WinGetPackage -Source winget
+$updatable = $installed | Where-Object IsUpdateAvailable | Select-Object -ExpandProperty Id
+$updatable | Out-file -FilePath "C:/log/updateavailable.csv" -Encoding utf8
+
+#Append status column and trim file
+$file = Import-Csv "C:/log/updateavailable.csv" -Header "column1"
+$file | select-object column1,@{Name="column2";Expression={'2'}} | Export-Csv -path "C:/log/updateavailable.csv" -NoTypeInformation
