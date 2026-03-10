@@ -1,11 +1,11 @@
-#Indicate new run of Update-Win_Standardapps
-$timestamp = Get-Date
-$timestamp | out-file -filepath "C:/log/WinGetVersion.log" -Append
-
 #Set up the log directory if necessary
 if (!(Test-Path "C:/log")) {
     New-Item -ItemType Directory -Path "C:/log" | Out-Null
 }
+
+#Indicate new run of Update-Win_Standardapps
+$timestamp = Get-Date
+$timestamp | out-file -filepath "C:/log/WinGetVersion.log" -Append
 
 #Install winget if necessary
 try {
@@ -32,7 +32,7 @@ foreach ($app in $appList) {
     $process = Get-Process | Where-Object {$_.Name -like $appToStop} | Select-Object -ExpandProperty ProcessName
     $processToKill = $process + ".exe"
     c:\windows\system32\taskkill /f /im $processtokill
- }
+}
 
 #Update the apps
 foreach ($app in $appList) {
