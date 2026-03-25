@@ -41,7 +41,7 @@ foreach ($app in $appList) {
 foreach ($app in $appList) {
     try {
         winget upgrade --id=$app --source=winget --silent --accept-package-agreements --accept-source-agreements --force
-        "Successfully ran Winget for $app" | out-file -filepath "C:\Program Files\Marcello\WinGetAppsUpdates\WinGetVersion.log" -Append
+        "Successfully started Winget for $app" | out-file -filepath "C:\Program Files\Marcello\WinGetAppsUpdates\WinGetVersion.log" -Append
     }
     catch {
         "Failed to run Winget for $app" | out-file -filepath "C:\Program Files\Marcello\WinGetAppsUpdates\WinGetVersion.log" -Append
