@@ -71,4 +71,4 @@ if (!(Test-Path $path)) {
     New-ItemProperty -Path "$path" -Name "$value" | Out-Null
 }
 
-Set-ItemProperty -Path $path -Name $value -Value $i
+Set-ItemProperty -Path $path -Name $value -Value $i -Type DWord
